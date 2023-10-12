@@ -21,7 +21,6 @@ module.exports = function (err, req, res, next) {
     res.status(err.statusCode).send({ error: errorResponse });
     logger.warn(JSON.stringify(logObject));
   } 
-  // Extend this section to capture other custom or known errors, if needed.
   else {
     res.status(500).send({ error: errorResponse });
     logger.error(JSON.stringify(logObject));
