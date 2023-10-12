@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+require('dotenv').config();
+
 const {
   BadRequestError,
   UnauthorizedError,
@@ -66,7 +68,7 @@ exports.login = async (req, res, next) => {
 	}
 
     try {
-      const token = jwt.sign({ id: user._id, role: user.role }, 'secret');
+      const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
       res.status(200).send({ token });
     } catch (jwtError) {
       logger.error(jwtError);

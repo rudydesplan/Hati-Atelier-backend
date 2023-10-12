@@ -1,51 +1,51 @@
 # Editions Machettes
 
 ## Contexte:
-Editions Machettes souhaite développer une API sécurisée pour gérer une bibliothèque de livres avec des utilisateurs ayant différents rôles (admin et utilisateur standard).
+Machettes Editions wants to develop a secure API to manage a library of books with users having different roles (admin and standard user).
 
 ## Spécifications:
 
-### 1. **Initialisation:**
-   - Création d'un projet Node.js.
-   - Installation des packages nécessaires: `express`, `winston`, `mongoose`, `jsonwebtoken`.
+### 1. **Initialization:**
+   - Creation of a Node.js project.
+   - Installation of necessary packages:  `express`, `winston`, `mongoose`, `jsonwebtoken`.
 
-### 2. **Système de Logging avec Winston:**
-   - Configuration de Winston pour enregistrer les informations, les warnings et les erreurs.
-   - Les logs doivent être consignés dans un fichier `logs.txt`.
+### 2. **Logging System with Winston:**
+   - Configuration of Winston to record information, warnings, and errors.
+   - Logs must be recorded in a `logs.txt` file.
 
-### 3. **Modèles de Données avec Mongoose:**
-   - Modèle `User` avec les champs `username`, `password` et `role` (admin ou user).
-   - Modèle `Book` avec les champs `title`, `author`, `pages`, `genre`, `published` (boolean) et `userId` (référence à User).
-   - Les mots de passe des utilisateurs doivent être hashés.
+### 3. **Data Models with Mongoose:**
+   - `User` model with the fields `username`, `password`, and `role` (admin or user).
+   - `Book` model with the fields `title`, `author`, `pages`, `genre`, `published` (boolean), and `userId` (reference to User).
+   - User passwords must be hashed.
 
-### 4. **Middleware et Routes avec JWT:**
-   - Mise en place d'un middleware JWT pour sécuriser les routes.
-   - Les routes `POST /books` et `DELETE /books/:id` doivent être accessibles uniquement par les administrateurs.
-   - Les routes `GET /books` et `GET /books/:id` doivent être accessibles par tous les utilisateurs authentifiés.
+### 4. **Middleware and Routes with JWT:**
+   - Implementation of JWT middleware to secure the routes.
+   - The routes `POST /books` and `DELETE /books/:id` should be accessible only by administrators.
+   - The routes `GET /books` and `GET /books/:id` should be accessible by all authenticated users.
 
-### 5. **Endpoints Requis:**
-   - `POST /users/register` pour enregistrer un nouvel utilisateur.
-   - `POST /users/login` pour connecter un utilisateur et renvoyer un JWT.
-   - `POST /books` pour ajouter un nouveau livre (admin seulement).
-   - `GET /books` pour récupérer tous les livres (utilisateurs authentifiés).
-   - `GET /books/:id` pour récupérer un livre spécifique (utilisateurs authentifiés).
-   - `DELETE /books/:id` pour supprimer un livre (admin seulement).
+### 5. **Required Endpoints:**
+   - `POST /users/register`  to register a new user.
+   - `POST /users/login`  to log in a user and return a JWT.
+   - `POST /books` to add a new book (admin only).
+   - `GET /books` to retrieve all books (authenticated users).
+   - `GET /books/:id` to retrieve a specific book (authenticated users).
+   - `DELETE /books/:id` to delete a book (admin only).
 
-### 6. **Gestion d'Erreur:**
-   - Mise en œuvre d'une gestion d'erreur robuste et cohérente sur tous les endpoints.
-   - Les erreurs doivent être loggées avec Winston.
-   - Les réponses d'erreur doivent être claires et structurées.
+### 6. **Error Management:**
+	- Implementation of robust and consistent error management across all endpoints.
+	- Errors should be logged with Winston.
+	- Error responses should be clear and structured.
 
 ### 7. **Test de l'API:**
-   - Tests complets de tous les endpoints avec des outils appropriés.
-   - Vérification de la sécurité JWT et de la gestion d'erreur.
+   - Comprehensive tests of all endpoints with appropriate tools.
+   - Verification of JWT security and error management.
 
 ## Livrables:
-- Code source documenté et commenté.
-- Documentation d'utilisation et un README de déploiement de l'API.
+- Documented and commented source code.
+- Usage documentation and a README for API deployment.
 
 ## Bonus
-- Réaliser un front-end simple pour exploiter l'API : technos et outils libre
+- Create a simple front-end to utilize the API: free choice of technologies and tools.
 
 ## Conclusion:
-Ce projet permettra aux Editions Machettes de gérer efficacement leur bibliothèque de livres avec une API sécurisée et robuste, facilitant ainsi les opérations quotidiennes et la gestion des utilisateurs et des livres.
+This project will allow Machettes Editions to effectively manage their library of books with a secure and robust API, thus facilitating daily operations and the management of users and books.
