@@ -1,4 +1,9 @@
-const { BadRequestError, UnauthorizedError } = require('../errors/CustomErrors');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const {
+  BadRequestError,
+  UnauthorizedError,
+} = require('../errors/CustomErrors');
 const logger = require('../utils/winstonConfig');
 
 exports.register = async (req, res, next) => {
@@ -34,15 +39,24 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+
     if (!username || !password) {
-      throw new BadRequestError('Username or password missing');
+      throw new BadRequestError('Missing username or password');
     }
+
     const user = await User.findOne({ username });
     if (!user || !(await user.comparePassword(password))) {
       throw new UnauthorizedError('Invalid credentials');
     }
-    const token = jwt.sign({ id: user._id, role: user.role }, 'secret');
-    res.status(200).send({ token });
+
+    try {
+      const token = jwt.sign({ id: user._id, role: user.role }, 'secret');
+      res.status(200).send({ token });
+    } catch (jwtError) {
+      logger.error(jwtError);
+      throw new UnauthorizedError('Token generation failed');
+    }
+    
   } catch (error) {
     logger.error(error);
     next(error);
