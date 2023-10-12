@@ -1,0 +1,29 @@
+{
+  "name": "machette",
+  "version": "1.0.0",
+  "description": "API sécurisée pour gérer une bibliothèque de livres avec des utilisateurs ayant différents rôles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rudydesplan/Hati-Atelier-backend.git"
+  },
+  "author": "Rudy Desplan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rudydesplan/Hati-Atelier-backend/issues"
+  },
+  "homepage": "https://github.com/rudydesplan/Hati-Atelier-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
