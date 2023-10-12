@@ -12,17 +12,33 @@ const Book = require('../models/Book');
 exports.addBook = async (req, res, next) => {
   try {
     const { title, author, pages, genre, published } = req.body;
-    if (!title || !author || typeof pages !== 'number' || !genre || typeof published !== 'boolean') {
-      throw new BadRequestError('Missing or incorrect book details');
+
+    if (!title) {
+      throw new BadRequestError('Missing title');
     }
+    if (!author) {
+      throw new BadRequestError('Missing author');
+    }
+    if (typeof pages !== 'number') {
+      throw new BadRequestError('Pages should be a number');
+    }
+    if (!genre) {
+      throw new BadRequestError('Missing genre');
+    }
+    if (typeof published !== 'boolean') {
+      throw new BadRequestError('Published should be a boolean');
+    }
+
     const newBook = new Book({ title, author, pages, genre, published, userId: req.user.id });
     await newBook.save();
     res.status(201).send('Book created');
+
   } catch (error) {
     logger.error(error);
     next(error);
   }
 };
+
 
 // Function to get all books
 exports.getBooks = async (req, res, next) => {

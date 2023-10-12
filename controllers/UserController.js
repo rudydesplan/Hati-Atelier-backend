@@ -11,9 +11,18 @@ exports.register = async (req, res, next) => {
     const { username, password, role } = req.body;
 
     // Data Integrity Checks
-    if (!username || !password || !['admin', 'user'].includes(role)) {
-      throw new BadRequestError('Incomplete or invalid data');
+    if (!username) {
+      throw new BadRequestError('Missing username');
     }
+    if (!password) {
+      throw new BadRequestError('Missing password');
+    }
+	if (!role) {
+	  throw new BadRequestError('Missing role');
+	}
+	if (!['admin', 'user'].includes(role)) {
+	  throw new BadRequestError('Invalid role');
+	}
 
     // Duplicate User Handling
     const existingUser = await User.findOne({ username });
@@ -40,14 +49,21 @@ exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    if (!username || !password) {
-      throw new BadRequestError('Missing username or password');
-    }
+    if (!username) {
+	  throw new BadRequestError('Missing username');
+	}
+	if (!password) {
+	  throw new BadRequestError('Missing password');
+	}
 
     const user = await User.findOne({ username });
-    if (!user || !(await user.comparePassword(password))) {
-      throw new UnauthorizedError('Invalid credentials');
-    }
+	
+    if (!user) {
+	  throw new UnauthorizedError('Invalid username');
+	}
+	if (!(await user.comparePassword(password))) {
+	  throw new UnauthorizedError('Invalid password');
+	}
 
     try {
       const token = jwt.sign({ id: user._id, role: user.role }, 'secret');
